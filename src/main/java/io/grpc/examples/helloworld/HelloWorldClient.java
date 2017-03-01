@@ -31,10 +31,9 @@
 
 package io.grpc.examples.helloworld;
 
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import io.grpc.StatusRuntimeException;
+import io.grpc.*;
 
+import javax.annotation.Nullable;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,7 +52,7 @@ public class HelloWorldClient {
     this(ManagedChannelBuilder.forAddress(host, port)
         // Channels are secure by default (via SSL/TLS). For the example we disable TLS to avoid
         // needing certificates.
-        .usePlaintext(true));
+        .usePlaintext(true).userAgent("token=9b4643ecdf9690426c81c0df59d252f3"));
   }
 
   /** Construct client for accessing RouteGuide server using the existing channel. */
@@ -85,18 +84,19 @@ public class HelloWorldClient {
    * greeting.
    */
   public static void main(String[] args) throws Exception {
-    HelloWorldClient client = new HelloWorldClient("localhost", 50051);
-    try {
+    HelloWorldClient client = new HelloWorldClient("127.0.0.1", 5000);
+     try {
       /* Access a service running on the local machine on port 50051 */
-      String user = "world";
+      String user = "worldssssssssssssss";
       if (args.length > 0) {
         user = args[0]; /* Use the arg as the name to greet if provided */
       }
-      for (int i = 0; i < 100; i ++) {
+      for (int i = 0; i < 10; i ++) {
         client.greet(user);
       }
     } finally {
       client.shutdown();
     }
+    System.out.println("#############finish##############");
   }
 }
