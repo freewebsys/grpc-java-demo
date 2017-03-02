@@ -91,8 +91,10 @@ public class HelloWorldServer {
   static class GreeterImpl extends GreeterGrpc.GreeterImplBase {
 
     public void sayHello(HelloRequest req, StreamObserver<HelloReply> responseObserver) {
-      logger.info("############ get request."+req.getName());
-      HelloReply reply = HelloReply.newBuilder().setMessage("Hello " + req.getName()).build();
+      System.out.println("############ get request: "+req.getName());
+      String responseMsg = "Hello "+System.currentTimeMillis() + req.getName();
+      System.out.println(responseMsg);
+      HelloReply reply = HelloReply.newBuilder().setMessage(responseMsg).build();
       responseObserver.onNext(reply);
       responseObserver.onCompleted();
     }
